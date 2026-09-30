@@ -5,12 +5,12 @@ export async function POST(request) {
     const { url, type = 'video' } = await request.json();
 
     if (!url || !url.startsWith('http')) {
-      return NextResponse.json({ success: false, message: "Please enter a valid HTTP/HTTPS media URL." }, { status: 400 });
+      Provider return NextResponse.json({ success: false, message: "Please enter a valid HTTP/HTTPS media URL." }, { status: 400 });
     }
 
     const payload = {
       url: url,
-      vQuality: "max",
+      videoQuality: "max",
       filenameStyle: "pretty"
     };
 
@@ -23,7 +23,8 @@ export async function POST(request) {
       method: "POST",
       headers: {
         "Accept": "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "User-Agent": "VexorNullNexus/11.0"
       },
       body: JSON.stringify(payload)
     });
@@ -54,7 +55,7 @@ export async function POST(request) {
 
     return NextResponse.json({
       success: true,
-      title: data.filename || "VexorNull Zenith Media",
+      title: data.filename || "VexorNull Nexus Media",
       thumbnail: data.thumbnail || "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&auto=format&fit=crop&q=60",
       downloads: downloadLinks
     });
